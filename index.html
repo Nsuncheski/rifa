@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Selección de números</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <h1>Selección de números</h1>
+    <p>Seleccione los números que desea comprar:</p>
+    <ul>
+      <!-- Creamos una lista de números del 00 al 99 -->
+      <script>
+        for (var i = 0; i < 100; i++) {
+          document.write('<li><label><input type="checkbox" name="numero" value="' + ('0' + i).slice(-2) + '">' + ('0' + i).slice(-2) + '</label></li>');
+        }
+      </script>
+    </ul>
+    <button type="button" onclick="comprar()">Comprar</button>
+
+    <script>
+      function comprar() {
+        // Obtener los números seleccionados
+        var numerosSeleccionados = [];
+        var checkboxes = document.getElementsByName("numero");
+        for (var i = 0; i < checkboxes.length; i++) {
+          if (checkboxes[i].checked) {
+            numerosSeleccionados.push(checkboxes[i].value);
+          }
+        }
+
+        // Crear el objeto JSON con los números seleccionados
+        var jsonSeleccionados = { "numeros": numerosSeleccionados };
+
+        // Enviar el objeto JSON a una API
+        fetch('http://127.0.0.1:8000/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(jsonSeleccionados)
+        })
+        .then(response => {
+          if (response.ok) {
+            console.log('La compra se realizó correctamente.');
+          } else {
+            console.log('Se produjo un error al realizar la compra.');
+          }
+        })
+        .catch(error => {
+          console.error('Se produjo un error al enviar la solicitud a la API:', error);
+        });
+      }
+    </script>
+  </body>
+</html>

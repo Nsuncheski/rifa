@@ -1,0 +1,29 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  li {
+    display: inline-block;
+    margin: 10px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    color: rgba(22, 1, 1, 0.582);
+    background-color: #0074d9;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px #888888;
+  }
+  
+  label {
+    cursor: pointer;
+  }
+
+input[type="text"] {
+color: black;
+}
+    
